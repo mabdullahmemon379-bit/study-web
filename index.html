@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Study Web</title>
+
+<style>
+body{
+  font-family: Arial;
+  background: linear-gradient(to right, #74ebd5, #9face6);
+  text-align:center;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  margin:60px auto;
+  width:70%;
+  border-radius:20px;
+  box-shadow:0px 10px 20px rgba(0,0,0,0.2);
+}
+
+button{
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  background:#6c5ce7;
+  color:white;
+  font-size:16px;
+}
+button:hover{
+  background:#341f97;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+  <h2 id="title"></h2>
+  <p id="text"></p>
+
+  <button onclick="prevPage()">⬅ Previous</button>
+  <button onclick="nextPage()">Next ➡</button>
+  <button onclick="speak()">🔊 Speak</button>
+</div>
+
+<script>
+let page = 0;
+
+const pages = [
+  {title:"Math Notes", text:"2 + 2 = 4"},
+  {title:"Science Notes", text:"Water = H2O"},
+  {title:"English Notes", text:"Present tense shows action now"}
+];
+
+function showPage(){
+  document.getElementById("title").innerText = pages[page].title;
+  document.getElementById("text").innerText = pages[page].text;
+}
+
+function nextPage(){
+  if(page < pages.length - 1){
+    page++;
+    showPage();
+  }
+}
+
+function prevPage(){
+  if(page > 0){
+    page--;
+    showPage();
+  }
+}
+
+function speak(){
+  let msg = new SpeechSynthesisUtterance(
+    pages[page].title + ". " + pages[page].text
+  );
+  speechSynthesis.speak(msg);
+}
+
+showPage();
+</script>
+
+</body>
+</html>
