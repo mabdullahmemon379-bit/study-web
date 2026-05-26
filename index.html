@@ -12,7 +12,7 @@ body{
 
 .card{
   background:Navy Blue;
-  padding:20px;
+  padding:40px;
   margin:90px auto;
   width:90%;
   border-radius:20px;
@@ -67,17 +67,17 @@ function nextPage(){
   }
 }
 
-function prevPage(){
-  if(page > 0){
-    page--;
-    showPage();
-  }
-}
-
 function speak(){
+  speechSynthesis.cancel();
+
   let msg = new SpeechSynthesisUtterance(
     pages[page].title + ". " + pages[page].text
   );
+
+  msg.rate = 0.9;   // speaking speed
+  msg.pitch = 1;    // voice tone
+  msg.volume = 1;   // sound
+
   speechSynthesis.speak(msg);
 }
 
