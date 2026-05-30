@@ -6,7 +6,6 @@
 
 <style>
 
-/* 🌐 BASE */
 html, body{
   margin:0;
   padding:0;
@@ -16,74 +15,47 @@ html, body{
   transition:0.5s;
 }
 
-/* 🌙 DEFAULT THEME */
+/* 🌙 BASE */
 body{
   background:#001f4d;
   color:white;
 }
 
-/* 🌈 10 THEMES */
-body.theme1{ background:#001f4d; }
-body.theme2{ background:#0f0f0f; }
-body.theme3{ background:#1a0033; }
-body.theme4{ background:#003333; }
-body.theme5{ background:#330000; }
-body.theme6{ background:#002b36; }
-body.theme7{ background:#1e3a8a; }
-body.theme8{ background:#2d1b69; }
-body.theme9{ background:#003f5c; }
-body.theme10{ background:#111827; }
-
-/* ☀️ LIGHT OVERRIDE */
+/* ☀️ LIGHT MODE (OVERRIDES EVERYTHING) */
 body.light{
   background:#f2f2f2;
   color:black;
 }
 
-/* 🌟 BACKGROUND */
-.stars, .shoot{
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  z-index:-1;
-}
+/* 🌈 THEMES (USE DATA ATTRIBUTE) */
+body[data-theme="theme1"]{ background:#001f4d; }
+body[data-theme="theme2"]{ background:#0f0f0f; }
+body[data-theme="theme3"]{ background:#1a0033; }
+body[data-theme="theme4"]{ background:#003333; }
+body[data-theme="theme5"]{ background:#330000; }
+body[data-theme="theme6"]{ background:#002b36; }
+body[data-theme="theme7"]{ background:#1e3a8a; }
+body[data-theme="theme8"]{ background:#2d1b69; }
+body[data-theme="theme9"]{ background:#003f5c; }
+body[data-theme="theme10"]{ background:#111827; }
 
-/* ⭐ STAR */
+/* 🌟 STARS */
 .star{
   position:absolute;
   width:2px;
   height:2px;
-  border-radius:50%;
+  background:white;
   animation:fall linear infinite;
 }
 
 body.light .star{ background:black; }
-body:not(.light) .star{ background:white; }
 
 @keyframes fall{
   0%{transform:translateY(-10vh); opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(110vh); opacity:0;}
+  100%{transform:translateY(110vh); opacity:1;}
 }
 
-/* 🌠 SHOOTING STAR */
-.shooting{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  animation:shoot 2s linear forwards;
-}
-
-@keyframes shoot{
-  0%{transform:translate(0,0); opacity:1;}
-  100%{transform:translate(400px,200px); opacity:0;}
-}
-
-/* 🧊 GLASS BOX */
+/* BOX */
 .box{
   width:80%;
   max-width:700px;
@@ -95,14 +67,7 @@ body:not(.light) .star{ background:white; }
   text-align:center;
 }
 
-/* 🔘 BUTTONS */
-button{
-  padding:8px;
-  margin:4px;
-  cursor:pointer;
-}
-
-/* 📍 TOP LEFT THEME */
+/* TOP LEFT */
 .top-left{
   position:fixed;
   top:10px;
@@ -110,185 +75,58 @@ button{
   z-index:10;
 }
 
-/* 📍 TOP RIGHT VOLUME */
+/* TOP RIGHT */
 .top-right{
   position:fixed;
   top:10px;
   right:10px;
   z-index:10;
-  text-align:right;
 }
 
-/* 📢 MESSAGE */
-#msgBox{
-  position:fixed;
-  top:60px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,0.6);
-  padding:10px;
-  border-radius:10px;
-  display:none;
-  z-index:20;
-}
-
-/* 🔵 SKY BLUE MODE (AUTO SPEAK ON) */
-.sky{
-  background:#87ceeb !important;
-  color:black !important;
+button{
+  padding:8px;
+  margin:4px;
 }
 
 </style>
 </head>
 
-<body class="theme1">
+<body data-theme="theme1">
 
-<!-- 🌟 BACKGROUND -->
-<div class="stars" id="stars"></div>
-<div class="shoot" id="shoot"></div>
-
-<!-- 📢 MESSAGE -->
-<div id="msgBox">🎤 Voice is ON - Study Mode Active</div>
-
-<!-- 🎨 THEME (TOP LEFT) -->
-<div class="top-left">
-  <select onchange="changeTheme(this.value)">
-    <option value="theme1">Theme 1</option>
-    <option value="theme2">Theme 2</option>
-    <option value="theme3">Theme 3</option>
-    <option value="theme4">Theme 4</option>
-    <option value="theme5">Theme 5</option>
-    <option value="theme6">Theme 6</option>
-    <option value="theme7">Theme 7</option>
-    <option value="theme8">Theme 8</option>
-    <option value="theme9">Theme 9</option>
-    <option value="theme10">Theme 10</option>
-  </select>
-
-  <button onclick="toggleLight()">☀️ Light/Dark</button>
-</div>
-
-<!-- 🔊 VOLUME (TOP RIGHT) -->
-<div class="top-right">
-  🔊 Volume<br>
-  <input type="range" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
-</div>
-
-<!-- 🧊 BOX -->
 <div class="box">
-
 <h2 id="title">Page 1</h2>
-<p id="content">Welcome to Study Web 🚀</p>
+<p id="content">Welcome 🚀</p>
+</div>
 
-<button onclick="prev()">⬅ Previous</button>
-<button onclick="next()">Next ➡</button>
+<!-- 🎨 THEME -->
+<div class="top-left">
+<select onchange="changeTheme(this.value)">
+  <option value="theme1">Theme 1</option>
+  <option value="theme2">Theme 2</option>
+  <option value="theme3">Theme 3</option>
+  <option value="theme4">Theme 4</option>
+  <option value="theme5">Theme 5</option>
+  <option value="theme6">Theme 6</option>
+  <option value="theme7">Theme 7</option>
+  <option value="theme8">Theme 8</option>
+  <option value="theme9">Theme 9</option>
+  <option value="theme10">Theme 10</option>
+</select>
 
-<br><br>
-
-<button onclick="startSpeak()">▶ Start Speak</button>
-<button onclick="stopSpeak()">⛔ Stop Speak</button>
-
+<button onclick="toggleLight()">☀️ Light</button>
 </div>
 
 <script>
 
-/* 🌈 THEME */
+/* 🌈 FIXED THEME SYSTEM */
 function changeTheme(t){
-  document.body.className = t;
+  document.body.dataset.theme = t;
 }
 
 /* ☀️ LIGHT MODE */
 function toggleLight(){
   document.body.classList.toggle("light");
 }
-
-/* 📄 PAGES */
-let page=1;
-let volume=1;
-let speaking=false;
-let speechUtterance;
-
-const pages=[
-  "Welcome to Study Web 🚀",
-  "This is Science 🔬",
-  "This is Math ➗",
-  "This is English 📘"
-];
-
-function update(){
-  document.getElementById("title").innerText="Page "+page;
-  document.getElementById("content").innerText=pages[page-1];
-
-  if(speaking) speak(pages[page-1]);
-}
-
-function next(){
-  if(page<pages.length){page++;update();}
-}
-
-function prev(){
-  if(page>1){page--;update();}
-}
-
-/* 🔊 SPEECH FIXED */
-function speak(text){
-  speechSynthesis.cancel();
-
-  speechUtterance = new SpeechSynthesisUtterance(text);
-  speechUtterance.volume = volume;
-
-  speechSynthesis.speak(speechUtterance);
-}
-
-/* ▶ START SPEAK */
-function startSpeak(){
-  speaking=true;
-  document.body.classList.add("sky");
-  showMsg("🎤 Voice is ON - GitHub says system active");
-  speak(pages[page-1]);
-}
-
-/* ⛔ STOP SPEAK */
-function stopSpeak(){
-  speaking=false;
-  document.body.classList.remove("sky");
-  speechSynthesis.cancel();
-  showMsg("🔇 Voice is OFF");
-}
-
-/* 🔊 VOLUME */
-function setVolume(v){
-  volume=v;
-}
-
-/* 📢 MESSAGE */
-function showMsg(text){
-  let box=document.getElementById("msgBox");
-  box.innerText=text;
-  box.style.display="block";
-
-  setTimeout(()=>box.style.display="none",3000);
-}
-
-/* 🌟 STARS */
-for(let i=0;i<80;i++){
-  let s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(3+Math.random()*5)+"s";
-  document.getElementById("stars").appendChild(s);
-}
-
-/* 🌠 SHOOTING STARS */
-setInterval(()=>{
-  let sh=document.createElement("div");
-  sh.className="shooting";
-  sh.style.top=Math.random()*50+"%";
-  sh.style.left=Math.random()*50+"%";
-  document.getElementById("shoot").appendChild(sh);
-
-  setTimeout(()=>sh.remove(),2000);
-},2500);
 
 </script>
 
