@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Smart Study Web Pro</title>
+<meta charset="UTF-8">
+<title>Study Web Pro</title>
 
 <style>
-body{
+/* 🌐 BASIC */
+html, body{
   margin:0;
+  padding:0;
+  overflow-x:hidden;
+  overflow-y:auto;
   font-family:Arial;
-  background:#001a4d;
-  color:white;
-  overflow:hidden;
-  transition:0.5s;
+  transition:0.4s;
 }
 
+/* 🌙 DARK THEME */
+body.dark{
+  background:#001f4d;
+  color:white;
+}
+
+/* ☀️ LIGHT THEME */
 body.light{
   background:#f2f2f2;
   color:black;
 }
 
-/* ⭐ STARS */
-.stars{
+/* 🌟 STARS */
+.stars, .shooting-stars{
   position:fixed;
   width:100%;
   height:100%;
@@ -28,195 +37,215 @@ body.light{
   z-index:-1;
 }
 
+/* normal stars */
 .star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  border-radius:50%;
+  animation:blink 2s infinite alternate;
+}
+
+body.dark .star{
+  background:white;
+}
+
+body.light .star{
+  background:black;
+}
+
+@keyframes blink{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+/* shooting stars */
+.shooting{
   position:absolute;
   width:3px;
   height:3px;
   background:white;
-  border-radius:50%;
-  animation: fall linear infinite;
+  animation:shoot 3s linear infinite;
 }
 
-@keyframes fall{
-  from{transform:translateY(-10px);}
-  to{transform:translateY(100vh);}
+@keyframes shoot{
+  0%{transform:translate(0,0); opacity:1;}
+  100%{transform:translate(400px,400px); opacity:0;}
 }
 
 /* 🧊 GLASS BOX */
 .box{
-  width:60%;
-  margin:70px auto;
+  width:80%;
+  max-width:700px;
+  margin:120px auto;
   padding:20px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.3);
   border-radius:15px;
-  backdrop-filter: blur(10px);
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
   text-align:center;
 }
 
-body.light .box{
-  background:rgba(0,0,0,0.08);
-}
-
-/* BUTTONS */
+/* buttons */
 button{
-  margin:6px;
-  padding:10px 14px;
-  border:none;
-  border-radius:10px;
+  padding:10px;
+  margin:5px;
   cursor:pointer;
-  background:rgba(255,255,255,0.2);
-  color:inherit;
 }
 
-button:hover{
-  background:rgba(255,255,255,0.3);
-}
-
-/* TOP CONTROLS */
-.top{
+/* chatbot */
+.chatbot{
   position:fixed;
-  top:10px;
+  bottom:10px;
+  right:10px;
+  width:250px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  border-radius:10px;
+  padding:10px;
+}
+
+.chatlog{
+  height:120px;
+  overflow-y:auto;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+input{
   width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:0 10px;
+  padding:5px;
 }
 </style>
 </head>
 
-<body>
+<body class="dark">
 
-<!-- ⭐ STARS -->
+<!-- 🌟 BACKGROUND -->
 <div class="stars" id="stars"></div>
+<div class="shooting-stars" id="shoot"></div>
 
-<!-- 🌙 MODE -->
-<div class="top">
-  <button onclick="toggleMode()">🌙 / ☀️ Mode</button>
-</div>
+<!-- 🔘 THEME BUTTON -->
+<button onclick="toggleTheme()">🌗 Theme</button>
 
-<!-- 🎵 MUSIC -->
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 🎶 RINGTONE -->
-<audio id="ringtone">
-  <source src="ringtone.mp3" type="audio/mpeg">
-</audio>
-
-<!-- 🎚️ VOLUME -->
-<div style="position:fixed;top:50px;right:10px;
-background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;">
-
-🎵 Volume<br>
-<input type="range" id="vol" min="0" max="100" value="50">
-<br>
-<button onclick="toggleMusic()">🎵 Play/Pause</button>
-<button onclick="stopMusic()">⛔ Stop Music</button>
-
-</div>
-
-<!-- 🧊 NOTES -->
+<!-- 🧊 MAIN BOX -->
 <div class="box">
 
-<h2 id="title"></h2>
-<p id="text"></p>
+<h2 id="title">Page 1</h2>
+<p id="content">Welcome to your Study Web 🚀</p>
 
-<button onclick="prev()">⬅ Prev</button>
+<button onclick="prev()">⬅ Previous</button>
 <button onclick="next()">Next ➡</button>
 
-<button onclick="speak()">🔊 Speak</button>
-<button onclick="stopSpeak()">⛔ Stop Speak</button>
+<br><br>
 
+<!-- 🔊 SPEECH -->
+<button onclick="toggleSpeak()">🔊 Auto Speak</button>
+<input type="range" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
+
+</div>
+
+<!-- 🤖 CHATBOT -->
+<div class="chatbot">
+  <div class="chatlog" id="chatlog"></div>
+  <input id="msg" placeholder="Ask something..." onkeydown="if(event.key==='Enter')send()">
 </div>
 
 <script>
 
-/* ⭐ STARS */
-for(let i=0;i<70;i++){
-  let s=document.createElement("div");
-  s.classList.add("star");
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=(2+Math.random()*5)+"s";
+/* 🌗 THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  document.body.classList.toggle("dark");
+}
+
+/* 📄 PAGES */
+let page = 1;
+let speakOn = false;
+let volume = 1;
+
+const pages = [
+  "Welcome to your Study Web 🚀",
+  "This is page 2 content 📘",
+  "This is page 3 content 📗"
+];
+
+function update(){
+  document.getElementById("title").innerText = "Page " + page;
+  document.getElementById("content").innerText = pages[page-1];
+  if(speakOn) speak(pages[page-1]);
+}
+
+function next(){
+  if(page < pages.length){
+    page++;
+    update();
+  }
+}
+
+function prev(){
+  if(page > 1){
+    page--;
+    update();
+  }
+}
+
+/* 🔊 SPEECH */
+function speak(text){
+  let msg = new SpeechSynthesisUtterance(text);
+  msg.volume = volume;
+  speechSynthesis.speak(msg);
+}
+
+function toggleSpeak(){
+  speakOn = !speakOn;
+  alert("Auto Speak: " + speakOn);
+}
+
+function setVolume(v){
+  volume = v;
+}
+
+/* 🌟 STARS GENERATOR */
+for(let i=0;i<80;i++){
+  let s = document.createElement("div");
+  s.className = "star";
+  s.style.top = Math.random()*100 + "%";
+  s.style.left = Math.random()*100 + "%";
   document.getElementById("stars").appendChild(s);
 }
 
-/* 📝 NOTES */
-const notes=[
- {t:"HTML",d:"HTML builds structure of websites."},
- {t:"CSS",d:"CSS styles websites."},
- {t:"JavaScript",d:"JS makes websites interactive."},
- {t:"Study Tip",d:"Practice daily for success."}
-];
+/* 🌠 SHOOTING STARS */
+setInterval(()=>{
+  let sh = document.createElement("div");
+  sh.className = "shooting";
+  sh.style.top = Math.random()*50 + "%";
+  sh.style.left = Math.random()*50 + "%";
+  document.getElementById("shoot").appendChild(sh);
 
-let i=0;
+  setTimeout(()=>sh.remove(),3000);
+},2000);
 
-function load(){
- document.getElementById("title").innerText=notes[i].t;
- document.getElementById("text").innerText=notes[i].d;
+/* 🤖 SIMPLE CHATBOT */
+function send(){
+  let input = document.getElementById("msg");
+  let log = document.getElementById("chatlog");
+
+  let text = input.value;
+  if(!text) return;
+
+  log.innerHTML += "You: " + text + "<br>";
+
+  let reply = "I am still learning 🤖";
+  if(text.toLowerCase().includes("hi")) reply = "Hello! 👋";
+  if(text.toLowerCase().includes("name")) reply = "I am your study assistant";
+
+  log.innerHTML += "Bot: " + reply + "<br>";
+
+  input.value="";
+  log.scrollTop = log.scrollHeight;
 }
-
-function next(){ if(i<notes.length-1){i++;load();} }
-function prev(){ if(i>0){i--;load();} }
-
-/* 🔊 SPEAK */
-let speech=null;
-
-function speak(){
- stopSpeak();
-
- speech=new SpeechSynthesisUtterance();
- speech.text=notes[i].t+". "+notes[i].d;
- speech.rate=1;
-
- speechSynthesis.speak(speech);
-}
-
-function stopSpeak(){
- speechSynthesis.cancel();
-}
-
-/* 🌙 MODE */
-function toggleMode(){
- document.body.classList.toggle("light");
-}
-
-/* 🎵 MUSIC */
-let music=document.getElementById("music");
-let vol=document.getElementById("vol");
-
-music.volume=0.5;
-
-vol.oninput=function(){
- music.volume=this.value/100;
-}
-
-function toggleMusic(){
- if(music.paused) music.play();
- else music.pause();
-}
-
-function stopMusic(){
- music.pause();
- music.currentTime=0;
-}
-
-/* 🎶 RINGTONE (plays once on load) */
-window.onload=function(){
- let ring=document.getElementById("ringtone");
- ring.play().catch(()=>{});
- load();
-};
 
 </script>
 
 </body>
 </html>
-
-body {
-  margin: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
