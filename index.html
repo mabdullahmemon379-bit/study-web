@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Smart Study Web (Offline AI)</title>
+<title>study-web</title>
 
 <style>
 body{
@@ -19,11 +19,13 @@ body.light{
   color:black;
 }
 
-/* ⭐ STARS */
+/* ⭐ STAR BACKGROUND */
 .stars{
   position:fixed;
   width:100%;
   height:100%;
+  top:0;
+  left:0;
   z-index:-1;
 }
 
@@ -44,14 +46,153 @@ body.light{
 /* 🧊 GLASS BOX */
 .box{
   width:60%;
-  margin:60px auto;
+  margin:80px auto;
   padding:20px;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.12);
   border:1px solid rgba(255,255,255,0.3);
   border-radius:15px;
-  backdrop-filter:blur(10px);
+  backdrop-filter: blur(10px);
   text-align:center;
 }
 
+/* LIGHT MODE BOX */
 body.light .box{
- 
+  background:rgba(0,0,0,0.08);
+}
+
+/* BUTTONS */
+button{
+  margin:8px;
+  padding:10px 14px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.2);
+  color:inherit;
+}
+
+button:hover{
+  background:rgba(255,255,255,0.3);
+}
+
+/* TOP CONTROLS */
+.controls{
+  position:fixed;
+  top:10px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ⭐ STARS -->
+<div class="stars" id="stars"></div>
+
+<!-- 🌙 MODE BUTTON -->
+<div class="controls">
+  <button onclick="toggleMode()">🌙 / ☀️ Mode</button>
+</div>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div style="position:fixed;top:50px;right:10px;
+background:rgba(255,255,255,0.1);padding:10px;border-radius:10px;">
+
+🎵 Volume<br>
+<input type="range" id="volume" min="0" max="100" value="50">
+<br>
+<button onclick="toggleMusic()">Play / Pause</button>
+
+</div>
+
+<!-- 🧊 MAIN BOX -->
+<div class="box">
+
+<h2 id="title"></h2>
+<p id="text"></p>
+
+<!-- NAV BUTTONS -->
+<button onclick="prev()">⬅ Previous</button>
+<button onclick="next()">Next ➡</button>
+<button onclick="speak()">🔊 Speak</button>
+
+</div>
+
+<script>
+
+/* ⭐ STAR ANIMATION */
+for(let i=0;i<70;i++){
+  let star=document.createElement("div");
+  star.classList.add("star");
+  star.style.left=Math.random()*100+"vw";
+  star.style.animationDuration=(2+Math.random()*5)+"s";
+  document.getElementById("stars").appendChild(star);
+}
+
+/* 📝 NOTES */
+const notes=[
+  {t:"HTML Notes",d:"HTML is used to create structure of web pages."},
+  {t:"CSS Notes",d:"CSS is used to design and style websites."},
+  {t:"JavaScript Notes",d:"JavaScript makes websites interactive and dynamic."},
+  {t:"Study Tip",d:"Practice daily for better learning results."}
+];
+
+let i=0;
+
+function load(){
+  document.getElementById("title").innerText=notes[i].t;
+  document.getElementById("text").innerText=notes[i].d;
+}
+
+function next(){
+  if(i<notes.length-1){i++;load();}
+}
+
+function prev(){
+  if(i>0){i--;load();}
+}
+
+/* 🔊 SPEAK */
+function speak(){
+  let msg=new SpeechSynthesisUtterance();
+  msg.text=notes[i].t+" "+notes[i].d;
+  speechSynthesis.speak(msg);
+}
+
+/* 🌙 DARK / LIGHT MODE */
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+/* 🎵 MUSIC */
+let music=document.getElementById("music");
+let volume=document.getElementById("volume");
+
+music.volume=0.5;
+
+volume.oninput=function(){
+  music.volume=this.value/100;
+}
+
+function toggleMusic(){
+  if(music.paused){
+    music.play();
+  }else{
+    music.pause();
+  }
+}
+
+/* INIT */
+load();
+
+</script>
+
+</body>
+</html>
