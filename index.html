@@ -5,7 +5,8 @@
 <title>Study Web Pro</title>
 
 <style>
-/* 🌐 BASIC */
+
+/* 🌐 GLOBAL */
 html, body{
   margin:0;
   padding:0;
@@ -15,19 +16,19 @@ html, body{
   transition:0.4s;
 }
 
-/* 🌙 DARK THEME */
+/* 🌙 DARK */
 body.dark{
   background:#001f4d;
   color:white;
 }
 
-/* ☀️ LIGHT THEME */
+/* ☀️ LIGHT */
 body.light{
   background:#f2f2f2;
   color:black;
 }
 
-/* 🌟 STARS */
+/* 🌟 STAR FIELD */
 .stars, .shooting-stars{
   position:fixed;
   width:100%;
@@ -37,40 +38,49 @@ body.light{
   z-index:-1;
 }
 
-/* normal stars */
+/* ⭐ FALLING STARS (TOP → DOWN) */
 .star{
   position:absolute;
   width:2px;
   height:2px;
   border-radius:50%;
-  animation:blink 2s infinite alternate;
+  animation:fall linear infinite;
 }
 
-body.dark .star{
-  background:white;
+body.dark .star{ background:white; }
+body.light .star{ background:black; }
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+  20%{opacity:1;}
+  100%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 
-body.light .star{
-  background:black;
-}
-
-@keyframes blink{
-  from{opacity:0.2;}
-  to{opacity:1;}
-}
-
-/* shooting stars */
+/* 🌠 SHOOTING STARS (DIAGONAL) */
 .shooting{
   position:absolute;
   width:3px;
   height:3px;
   background:white;
-  animation:shoot 3s linear infinite;
+  border-radius:50%;
+  animation:shoot 2s linear forwards;
 }
 
 @keyframes shoot{
-  0%{transform:translate(0,0); opacity:1;}
-  100%{transform:translate(400px,400px); opacity:0;}
+  0%{
+    transform:translate(0,0);
+    opacity:1;
+  }
+  100%{
+    transform:translate(400px,200px);
+    opacity:0;
+  }
 }
 
 /* 🧊 GLASS BOX */
@@ -85,20 +95,20 @@ body.light .star{
   text-align:center;
 }
 
-/* buttons */
+/* BUTTONS */
 button{
   padding:10px;
   margin:5px;
   cursor:pointer;
 }
 
-/* chatbot */
+/* 🤖 CHATBOT */
 .chatbot{
   position:fixed;
   bottom:10px;
   right:10px;
-  width:250px;
-  background:rgba(0,0,0,0.6);
+  width:260px;
+  background:rgba(0,0,0,0.7);
   color:white;
   border-radius:10px;
   padding:10px;
@@ -115,6 +125,7 @@ input{
   width:100%;
   padding:5px;
 }
+
 </style>
 </head>
 
@@ -124,21 +135,20 @@ input{
 <div class="stars" id="stars"></div>
 <div class="shooting-stars" id="shoot"></div>
 
-<!-- 🔘 THEME BUTTON -->
+<!-- 🌗 THEME -->
 <button onclick="toggleTheme()">🌗 Theme</button>
 
-<!-- 🧊 MAIN BOX -->
+<!-- 🧊 BOX -->
 <div class="box">
 
 <h2 id="title">Page 1</h2>
-<p id="content">Welcome to your Study Web 🚀</p>
+<p id="content">Welcome to Study Web 🚀</p>
 
 <button onclick="prev()">⬅ Previous</button>
 <button onclick="next()">Next ➡</button>
 
 <br><br>
 
-<!-- 🔊 SPEECH -->
 <button onclick="toggleSpeak()">🔊 Auto Speak</button>
 <input type="range" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
 
@@ -147,7 +157,7 @@ input{
 <!-- 🤖 CHATBOT -->
 <div class="chatbot">
   <div class="chatlog" id="chatlog"></div>
-  <input id="msg" placeholder="Ask something..." onkeydown="if(event.key==='Enter')send()">
+  <input id="msg" placeholder="Ask me..." onkeydown="if(event.key==='Enter')send()">
 </div>
 
 <script>
@@ -164,9 +174,9 @@ let speakOn = false;
 let volume = 1;
 
 const pages = [
-  "Welcome to your Study Web 🚀",
-  "This is page 2 content 📘",
-  "This is page 3 content 📗"
+  "Welcome to Study Web 🚀",
+  "This is page 2 📘",
+  "This is page 3 📗"
 ];
 
 function update(){
@@ -205,12 +215,13 @@ function setVolume(v){
   volume = v;
 }
 
-/* 🌟 STARS GENERATOR */
+/* 🌟 FALLING STARS */
 for(let i=0;i<80;i++){
   let s = document.createElement("div");
   s.className = "star";
-  s.style.top = Math.random()*100 + "%";
   s.style.left = Math.random()*100 + "%";
+  s.style.animationDuration = (3 + Math.random()*5) + "s";
+  s.style.animationDelay = Math.random()*5 + "s";
   document.getElementById("stars").appendChild(s);
 }
 
@@ -222,22 +233,36 @@ setInterval(()=>{
   sh.style.left = Math.random()*50 + "%";
   document.getElementById("shoot").appendChild(sh);
 
-  setTimeout(()=>sh.remove(),3000);
-},2000);
+  setTimeout(()=>sh.remove(),2000);
+},2500);
 
-/* 🤖 SIMPLE CHATBOT */
+/* 🤖 SMART CHATBOT */
 function send(){
   let input = document.getElementById("msg");
   let log = document.getElementById("chatlog");
 
-  let text = input.value;
+  let text = input.value.toLowerCase();
   if(!text) return;
 
   log.innerHTML += "You: " + text + "<br>";
 
-  let reply = "I am still learning 🤖";
-  if(text.toLowerCase().includes("hi")) reply = "Hello! 👋";
-  if(text.toLowerCase().includes("name")) reply = "I am your study assistant";
+  let reply = "";
+
+  if(text.includes("hi") || text.includes("hello")){
+    reply = "Hello 👋 How can I help you?";
+  }
+  else if(text.includes("name")){
+    reply = "I am your Study Assistant 🤖";
+  }
+  else if(text.includes("science")){
+    reply = "Science is the study of nature, matter, energy and how everything works 🔬";
+  }
+  else if(text.includes("math")){
+    reply = "Math is the study of numbers, shapes and patterns ➗";
+  }
+  else{
+    reply = "I am still learning more topics 🤖";
+  }
 
   log.innerHTML += "Bot: " + reply + "<br>";
 
