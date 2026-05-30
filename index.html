@@ -1,22 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Test</title>
-</head>
+<title>Smart Study Web (Offline AI)</title>
 
-<body style="background:darkblue; color:white; text-align:center;">
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#001a4d;
+  color:white;
+  overflow:hidden;
+  transition:0.5s;
+}
 
-<h1 id="title"></h1>
-<p id="text"></p>
+/* 🌙 LIGHT MODE */
+body.light{
+  background:#f2f2f2;
+  color:black;
+}
 
-<script>
+/* ⭐ STARS */
+.stars{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
 
-document.getElementById("title").innerText = "Biology";
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation: fall linear infinite;
+}
 
-document.getElementById("text").innerText =
-"Hello Hafsa! If this text shows, website is working.";
+@keyframes fall{
+  from{transform:translateY(-10px);}
+  to{transform:translateY(100vh);}
+}
 
-</script>
+/* 🧊 GLASS BOX */
+.box{
+  width:60%;
+  margin:60px auto;
+  padding:20px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:15px;
+  backdrop-filter:blur(10px);
+  text-align:center;
+}
 
-</body>
-</html>
+body.light .box{
+ 
