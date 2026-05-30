@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Study Web Pro</title>
+<title>Study Web Pro</title>
 
 <style>
 
@@ -16,20 +16,20 @@ html, body{
   transition:0.4s;
 }
 
-/* 🌙 DARK */
+/* 🌙 DARK THEME */
 body.dark{
   background:#001f4d;
   color:white;
 }
 
-/* ☀️ LIGHT */
+/* ☀️ LIGHT THEME */
 body.light{
   background:#f2f2f2;
   color:black;
 }
 
-/* 🌟 BACKGROUND */
-.stars, .shoot{
+/* 🌟 BACKGROUND LAYERS */
+.stars, .shooting-stars{
   position:fixed;
   width:100%;
   height:100%;
@@ -38,30 +38,56 @@ body.light{
   z-index:-1;
 }
 
-/* ⭐ STARS FALL */
+/* ⭐ FALLING STARS */
 .star{
   position:absolute;
   width:2px;
   height:2px;
-  background:white;
-  animation:fall 6s linear infinite;
+  border-radius:50%;
+  animation:fall linear infinite;
 }
 
-body.light .star{
-  background:black;
-}
+body.dark .star{ background:white; }
+body.light .star{ background:black; }
 
 @keyframes fall{
-  0%{transform:translateY(-10vh); opacity:0;}
+  0%{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
   20%{opacity:1;}
-  100%{transform:translateY(110vh); opacity:0;}
+  100%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+/* 🌠 SHOOTING STARS */
+.shooting{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:white;
+  animation:shoot 2s linear forwards;
+}
+
+@keyframes shoot{
+  0%{
+    transform:translate(0,0);
+    opacity:1;
+  }
+  100%{
+    transform:translate(400px,200px);
+    opacity:0;
+  }
 }
 
 /* 🧊 GLASS BOX */
 .box{
   width:80%;
   max-width:700px;
-  margin:100px auto;
+  margin:120px auto;
   padding:20px;
   border-radius:15px;
   background:rgba(255,255,255,0.1);
@@ -76,28 +102,9 @@ button{
   cursor:pointer;
 }
 
-/* 🤖 CHATBOT */
-.chatbot{
-  position:fixed;
-  bottom:10px;
-  right:10px;
-  width:300px;
-  background:rgba(0,0,0,0.75);
-  color:white;
-  border-radius:10px;
-  padding:10px;
-}
-
-.chatlog{
-  height:150px;
-  overflow-y:auto;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-input{
-  width:100%;
-  padding:5px;
+/* 🎚 SLIDER */
+input[type="range"]{
+  width:60%;
 }
 
 </style>
@@ -107,20 +114,31 @@ input{
 
 <!-- 🌟 BACKGROUND -->
 <div class="stars" id="stars"></div>
+<div class="shooting-stars" id="shoot"></div>
 
-<!-- 🌗 THEME -->
+<!-- 🌗 THEME BUTTON -->
 <button onclick="toggleTheme()">🌗 Theme</button>
 
-<!-- 🧊 BOX -->
+<!-- 🧊 MAIN BOX -->
 <div class="box">
-<h2>🚀 AI Study Web Pro</h2>
-<p>Full real ChatGPT AI chatbot system</p>
-</div>
 
-<!-- 🤖 CHATBOT -->
-<div class="chatbot">
-  <div class="chatlog" id="chatlog"></div>
-  <input id="msg" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')send()">
+<h2 id="title">Page 1</h2>
+<p id="content">Welcome to your Study Web 🚀</p>
+
+<button onclick="prev()">⬅ Previous</button>
+<button onclick="next()">Next ➡</button>
+
+<br><br>
+
+<!-- 🔊 SPEECH -->
+<button onclick="toggleSpeak()">🔊 Auto Speak</button>
+
+<br><br>
+
+<!-- 🎚 VOLUME -->
+Volume:
+<input type="range" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
+
 </div>
 
 <script>
@@ -131,57 +149,77 @@ function toggleTheme(){
   document.body.classList.toggle("dark");
 }
 
-/* 🌟 STARS */
+/* 📄 CONTENT PAGES */
+let page = 1;
+let speakOn = false;
+let volume = 1;
+
+const pages = [
+  "Welcome to your Study Web 🚀",
+  "This is page 2 - Learn English 📘",
+  "This is page 3 - Science Notes 🔬",
+  "This is page 4 - Mathematics ➗"
+];
+
+function update(){
+  document.getElementById("title").innerText = "Page " + page;
+  document.getElementById("content").innerText = pages[page-1];
+
+  if(speakOn){
+    speak(pages[page-1]);
+  }
+}
+
+function next(){
+  if(page < pages.length){
+    page++;
+    update();
+  }
+}
+
+function prev(){
+  if(page > 1){
+    page--;
+    update();
+  }
+}
+
+/* 🔊 SPEECH SYSTEM */
+function speak(text){
+  let msg = new SpeechSynthesisUtterance(text);
+  msg.volume = volume;
+  speechSynthesis.speak(msg);
+}
+
+function toggleSpeak(){
+  speakOn = !speakOn;
+  alert("Auto Speak: " + (speakOn ? "ON" : "OFF"));
+}
+
+function setVolume(v){
+  volume = v;
+}
+
+/* 🌟 FALLING STARS */
 for(let i=0;i<80;i++){
-  let s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(3+Math.random()*5)+"s";
+  let s = document.createElement("div");
+  s.className = "star";
+  s.style.left = Math.random()*100 + "%";
+  s.style.animationDuration = (3 + Math.random()*5) + "s";
+  s.style.animationDelay = Math.random()*5 + "s";
   document.getElementById("stars").appendChild(s);
 }
 
-/* 🤖 REAL AI CHATBOT */
-async function send(){
+/* 🌠 SHOOTING STARS */
+setInterval(()=>{
+  let sh = document.createElement("div");
+  sh.className = "shooting";
+  sh.style.top = Math.random()*50 + "%";
+  sh.style.left = Math.random()*50 + "%";
+  document.getElementById("shoot").appendChild(sh);
 
-  let input = document.getElementById("msg");
-  let log = document.getElementById("chatlog");
-
-  let text = input.value;
-  if(!text) return;
-
-  log.innerHTML += "You: " + text + "<br>";
-  input.value="";
-
-  log.innerHTML += "Bot: thinking... 🤖<br>";
-
-  try {
-
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Bearer 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"
-      },
-      body:JSON.stringify({
-        model:"gpt-4o-mini",
-        messages:[
-          {role:"system", content:"You are a helpful study assistant for students."},
-          {role:"user", content:text}
-        ]
-      })
-    });
-
-    const data = await res.json();
-    let reply = data.choices[0].message.content;
-
-    log.innerHTML += "Bot: " + reply + "<br>";
-
-  } catch(e){
-    log.innerHTML += "Bot: Error connecting to AI ❌<br>";
-  }
-
-  log.scrollTop = log.scrollHeight;
-}
+  setTimeout(()=>sh.remove(),2000);
+},2500);
 
 </script>
 
