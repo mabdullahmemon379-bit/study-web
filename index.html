@@ -2,133 +2,139 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Study Web Pro</title>
-
 <style>
-
-html, body{
-  margin:0;
-  padding:0;
-  overflow-x:hidden;
-  overflow-y:auto;
-  font-family:Arial;
-  transition:0.5s;
-}
-
-/* 🌙 BASE */
-body{
-  background:#001f4d;
-  color:white;
-}
-
-/* ☀️ LIGHT MODE (OVERRIDES EVERYTHING) */
-body.light{
-  background:#f2f2f2;
-  color:black;
-}
-
-/* 🌈 THEMES (USE DATA ATTRIBUTE) */
-body[data-theme="theme1"]{ background:#001f4d; }
-body[data-theme="theme2"]{ background:#0f0f0f; }
-body[data-theme="theme3"]{ background:#1a0033; }
-body[data-theme="theme4"]{ background:#003333; }
-body[data-theme="theme5"]{ background:#330000; }
-body[data-theme="theme6"]{ background:#002b36; }
-body[data-theme="theme7"]{ background:#1e3a8a; }
-body[data-theme="theme8"]{ background:#2d1b69; }
-body[data-theme="theme9"]{ background:#003f5c; }
-body[data-theme="theme10"]{ background:#111827; }
-
-/* 🌟 STARS */
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  animation:fall linear infinite;
-}
-
-body.light .star{ background:black; }
-
-@keyframes fall{
-  0%{transform:translateY(-10vh); opacity:0;}
-  100%{transform:translateY(110vh); opacity:1;}
-}
-
-/* BOX */
-.box{
-  width:80%;
-  max-width:700px;
-  margin:120px auto;
-  padding:20px;
-  border-radius:15px;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);
-  text-align:center;
-}
-
-/* TOP LEFT */
-.top-left{
-  position:fixed;
-  top:10px;
-  left:10px;
-  z-index:10;
-}
-
-/* TOP RIGHT */
-.top-right{
-  position:fixed;
-  top:10px;
-  right:10px;
-  z-index:10;
-}
-
-button{
-  padding:8px;
-  margin:4px;
-}
-
+html,body{margin:0;padding:0;overflow-x:hidden;font-family:Arial,sans-serif;color:white}
+body{min-height:100vh;transition:.5s}
+#bg{position:fixed;inset:0;z-index:-2}
+.stars{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:fall linear infinite}
+@keyframes fall{from{transform:translateY(-10vh)}to{transform:translateY(110vh)}}
+.shooting{position:absolute;width:3px;height:3px;background:white;border-radius:50%;animation:shoot 2s linear forwards}
+@keyframes shoot{to{transform:translate(400px,200px);opacity:0}}
+.top-left,.top-right{position:fixed;top:10px;z-index:10}
+.top-left{left:10px}.top-right{right:10px}
+.box{width:min(800px,85%);margin:120px auto;padding:20px;border-radius:20px;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);text-align:center}
+button,select,input{padding:8px;margin:4px}
+.notice{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:10px 16px;border-radius:12px;display:none}
 </style>
 </head>
+<body>
+<canvas id="bg"></canvas>
+<div class="stars" id="stars"></div>
+<div class="notice" id="notice"></div>
 
-<body data-theme="theme1">
-
-<div class="box">
-<h2 id="title">Page 1</h2>
-<p id="content">Welcome 🚀</p>
+<div class="top-left">
+<select id="theme">
+<option value="0">🌌 Space</option>
+<option value="1">🌊 Ocean</option>
+<option value="2">🔥 Fire</option>
+<option value="3">🌲 Forest</option>
+<option value="4">💜 Galaxy</option>
+<option value="5">🌈 Rainbow</option>
+<option value="6">⚡ Electric</option>
+<option value="7">🌸 Sakura</option>
+<option value="8">🤖 Cyberpunk</option>
+<option value="9">🌠 Aurora</option>
+</select>
 </div>
 
-<!-- 🎨 THEME -->
-<div class="top-left">
-<select onchange="changeTheme(this.value)">
-  <option value="theme1">Theme 1</option>
-  <option value="theme2">Theme 2</option>
-  <option value="theme3">Theme 3</option>
-  <option value="theme4">Theme 4</option>
-  <option value="theme5">Theme 5</option>
-  <option value="theme6">Theme 6</option>
-  <option value="theme7">Theme 7</option>
-  <option value="theme8">Theme 8</option>
-  <option value="theme9">Theme 9</option>
-  <option value="theme10">Theme 10</option>
-</select>
+<div class="top-right">
+🔊 Volume<br>
+<input type="range" id="vol" min="0" max="1" step="0.1" value="1">
+</div>
 
-<button onclick="toggleLight()">☀️ Light</button>
+<div class="box">
+<h1 id="title">Page 1</h1>
+<p id="content">Welcome to your Study Web 🚀</p>
+<button onclick="prevPage()">⬅ Previous</button>
+<button onclick="nextPage()">Next ➡</button>
+<br><br>
+<button onclick="startSpeak()">▶ Start Speak</button>
+<button onclick="stopSpeak()">⏹ Stop Speak</button>
 </div>
 
 <script>
+const pages=[
+"Welcome to your Study Web 🚀",
+"Science is the study of the natural world 🔬",
+"Mathematics helps solve problems ➗",
+"English improves communication 📘"
+];
+let page=0,speaking=false;
 
-/* 🌈 FIXED THEME SYSTEM */
-function changeTheme(t){
-  document.body.dataset.theme = t;
+function update(){
+ title.textContent="Page "+(page+1);
+ content.textContent=pages[page];
+ if(speaking)speak(pages[page]);
+}
+function nextPage(){if(page<pages.length-1){page++;update();}}
+function prevPage(){if(page>0){page--;update();}}
+
+function speak(t){
+ speechSynthesis.cancel();
+ let u=new SpeechSynthesisUtterance(t);
+ u.volume=parseFloat(vol.value);
+ speechSynthesis.speak(u);
+}
+function startSpeak(){speaking=true;show("🎤 Voice ON");speak(pages[page]);}
+function stopSpeak(){speaking=false;speechSynthesis.cancel();show("🔇 Voice OFF");}
+
+function show(t){
+ notice.textContent=t;
+ notice.style.display="block";
+ setTimeout(()=>notice.style.display="none",2000);
 }
 
-/* ☀️ LIGHT MODE */
-function toggleLight(){
-  document.body.classList.toggle("light");
+for(let i=0;i<100;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"%";
+ s.style.animationDuration=(3+Math.random()*6)+"s";
+ stars.appendChild(s);
 }
 
+setInterval(()=>{
+ let sh=document.createElement("div");
+ sh.className="shooting";
+ sh.style.left=Math.random()*50+"%";
+ sh.style.top=Math.random()*50+"%";
+ stars.appendChild(sh);
+ setTimeout(()=>sh.remove(),2000);
+},2500);
+
+const themes=[
+["#001f4d","#0a3d91"],["#006994","#00b4d8"],["#7f1d1d","#ff6b00"],
+["#14532d","#22c55e"],["#2e1065","#7c3aed"],["#ff0080","#00dbde"],
+["#0f172a","#38bdf8"],["#db2777","#f9a8d4"],["#111827","#06b6d4"],
+["#065f46","#7dd3fc"]
+];
+
+const canvas=document.getElementById("bg"),ctx=canvas.getContext("2d");
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+addEventListener("resize",resize);resize();
+
+let themeIndex=0;
+theme.onchange=e=>themeIndex=+e.target.value;
+
+function draw(){
+ const g=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+ g.addColorStop(0,themes[themeIndex][0]);
+ g.addColorStop(1,themes[themeIndex][1]);
+ ctx.fillStyle=g;
+ ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ const t=Date.now()/500;
+ for(let i=0;i<30;i++){
+   ctx.beginPath();
+   ctx.arc((i*70+t*10)%canvas.width,(i*40+t*5)%canvas.height,2+(i%3),0,Math.PI*2);
+   ctx.fillStyle="rgba(255,255,255,.5)";
+   ctx.fill();
+ }
+ requestAnimationFrame(draw);
+}
+draw();
 </script>
-
 </body>
 </html>
