@@ -97,6 +97,20 @@ button,select,input{
   display:none;
   z-index:50;
 }
+
+/* ✅ FIX ADDED: BOLD TEXT SYSTEM */
+#content{
+  white-space:pre-wrap;
+  font-weight:500;
+  line-height:1.7;
+}
+
+#content b{
+  display:block;
+  font-size:18px;
+  font-weight:700;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -128,17 +142,19 @@ button,select,input{
 
 <div class="box">
 <h1 id="title"></h1>
-<pre id="content" style="white-space:pre-wrap;"></pre>
+<pre id="content"></pre>
 
 <button onclick="prevPage()">⬅ Previous</button>
 <button onclick="nextPage()">Next ➡</button>
+
 <br><br>
 <button onclick="startSpeak()">▶ Start Speak</button>
 <button onclick="stopSpeak()">⏹ Stop Speak</button>
 </div>
 
 <script>
-/* ✅ FIXED DOM REFERENCES */
+
+/* FIXED DOM */
 const title = document.getElementById("title");
 const content = document.getElementById("content");
 const vol = document.getElementById("vol");
@@ -166,14 +182,18 @@ Result checking.
 let page = 0;
 let speaking = false;
 
-/* IMPORTANT FIX */
+/* UPDATE */
 function update(){
   title.textContent = "Page " + (page + 1);
-  content.textContent = pages[page];
+
+  /* ✅ BOLD FIX APPLIED HERE */
+  content.innerHTML = pages[page]
+    .replace(/\n\n/g,"<br><br>")
+    .replace(/([A-Z][a-zA-Z ]+)/g,"<b>$1</b>");
+
   if(speaking) speak(pages[page]);
 }
 
-/* NAVIGATION */
 function nextPage(){
   if(page < pages.length - 1){
     page++;
@@ -208,7 +228,6 @@ function stopSpeak(){
   show("🔇 Voice OFF");
 }
 
-/* NOTICE */
 function show(t){
   notice.textContent = t;
   notice.style.display = "block";
@@ -224,7 +243,7 @@ for(let i=0;i<100;i++){
   stars.appendChild(s);
 }
 
-/* SHOOTING STARS */
+/* SHOOTING */
 setInterval(()=>{
   let sh=document.createElement("div");
   sh.className="shooting";
@@ -252,10 +271,9 @@ function resize(){
 addEventListener("resize",resize);
 resize();
 
-let themeIndex = 0;
-theme.onchange = e => themeIndex = +e.target.value;
+let themeIndex=0;
+theme.onchange=e=>themeIndex=+e.target.value;
 
-/* BACKGROUND DRAW */
 function draw(){
   const g=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
   g.addColorStop(0,themes[themeIndex][0]);
@@ -268,8 +286,8 @@ function draw(){
 }
 draw();
 
-/* ✅ FINAL FIX: START APP */
 update();
+
 </script>
 
 </body>
