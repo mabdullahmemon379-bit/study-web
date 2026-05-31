@@ -12,16 +12,17 @@ html,body{
   overflow-x:hidden;
   font-family:Arial,sans-serif;
   color:white;
+  background:black;
 }
 
-/* FIXED: background canvas */
+/* BACKGROUND CANVAS */
 #bg{
   position:fixed;
   inset:0;
   z-index:0;
 }
 
-/* FIXED: stars layer */
+/* STARS */
 .stars{
   position:fixed;
   inset:0;
@@ -30,7 +31,6 @@ html,body{
   pointer-events:none;
 }
 
-/* FIXED: stars animation (unchanged) */
 .star{
   position:absolute;
   width:2px;
@@ -45,7 +45,7 @@ html,body{
   to{transform:translateY(110vh)}
 }
 
-/* shooting stars (unchanged) */
+/* SHOOTING STARS */
 .shooting{
   position:absolute;
   width:3px;
@@ -59,17 +59,16 @@ html,body{
   to{transform:translate(400px,200px);opacity:0}
 }
 
-/* FIXED: UI buttons stay above everything */
+/* UI */
 .top-left,.top-right{
   position:fixed;
   top:10px;
   z-index:10;
 }
-
 .top-left{left:10px}
 .top-right{right:10px}
 
-/* FIXED: content box MUST be above stars */
+/* CONTENT BOX */
 .box{
   position:relative;
   z-index:20;
@@ -128,122 +127,95 @@ button,select,input{
 </div>
 
 <div class="box">
-<h1 id="title">Page 1</h1>
-<pre id="content" style="white-space:pre-wrap;font-family:Arial;"></pre>
+<h1 id="title"></h1>
+<pre id="content" style="white-space:pre-wrap;"></pre>
 
 <button onclick="prevPage()">⬅ Previous</button>
 <button onclick="nextPage()">Next ➡</button>
-
 <br><br>
-
 <button onclick="startSpeak()">▶ Start Speak</button>
 <button onclick="stopSpeak()">⏹ Stop Speak</button>
 </div>
 
 <script>
-const pages = [`Biological Problem
+/* ✅ FIXED DOM REFERENCES */
+const title = document.getElementById("title");
+const content = document.getElementById("content");
+const vol = document.getElementById("vol");
+const theme = document.getElementById("theme");
+const notice = document.getElementById("notice");
+const stars = document.getElementById("stars");
 
-The Biological Method
-
-The biological method is a series of steps used to answer specific questions about the natural world.
+/* PAGES */
+const pages = [`
+Biological Method
 
 1. Observation
-Scientists use their five senses for qualitative observations and scientific equipment for quantitative observations.
-
-Qualitative Observations:
-• Smell
-• Touch
-• Taste
-• Hearing
-• Sight
-
-Quantitative Observations:
-• Weight
-• Temperature
-• Length
-• Measurable data
+Scientists use senses and instruments.
 
 2. Hypothesis
-A hypothesis is an intelligent guess made by a scientist to explain an observation.
-A good hypothesis must be testable through an experiment.
+An intelligent guess.
 
-3. Deduction
-Deduction uses if-then logic to move from a general idea to a specific prediction.
+3. Experiment
+Testing hypothesis.
 
-4. Experiment
-Scientists perform practical tests to find the real cause of a problem.
-
-Experimental Group:
-The group being tested.
-
-Control Group:
-A healthy or normal group used for comparison.
-
-5. Result and Data Analysis
-Results are reported using tables, charts, and graphs.
-
-6. Conclusion
-Scientists analyze the results to decide whether the hypothesis was correct.
-
-Theory, Law and Principle
-
-Theory:
-A well-tested explanation supported by many experiments.
-
-Law and Principle:
-A scientific law is a constant fact of nature.
-
-The Role of Mathematics
-
-Mathematics is essential in science.
-Biologists use mathematics to measure, predict, and understand natural events.
-
-Example: The Case of Malaria
-
-Observation:
-Scientists observed Plasmodium in the blood of malaria patients.
-
-Hypothesis:
-Plasmodium causes malaria.
-
-Experiment:
-Scientists compared blood from 100 malaria patients and 100 healthy people.
-
-Result:
-All malaria patients had Plasmodium while healthy people did not.
-
-Conclusion:
-Scientists confirmed that Plasmodium is the cause of malaria. 🔬`];
+4. Conclusion
+Result checking.
+`];
 
 let page = 0;
 let speaking = false;
 
+/* IMPORTANT FIX */
 function update(){
   title.textContent = "Page " + (page + 1);
   content.textContent = pages[page];
   if(speaking) speak(pages[page]);
 }
 
-function nextPage(){ if(page < pages.length - 1){ page++; update(); } }
-function prevPage(){ if(page > 0){ page--; update(); } }
+/* NAVIGATION */
+function nextPage(){
+  if(page < pages.length - 1){
+    page++;
+    update();
+  }
+}
 
-function speak(t){
+function prevPage(){
+  if(page > 0){
+    page--;
+    update();
+  }
+}
+
+/* SPEECH */
+function speak(text){
   speechSynthesis.cancel();
-  let u = new SpeechSynthesisUtterance(t);
+  let u = new SpeechSynthesisUtterance(text);
   u.volume = parseFloat(vol.value);
   speechSynthesis.speak(u);
 }
 
-function startSpeak(){ speaking = true; show("🎤 Voice ON"); speak(pages[page]); }
-function stopSpeak(){ speaking = false; speechSynthesis.cancel(); show("🔇 Voice OFF"); }
+function startSpeak(){
+  speaking = true;
+  show("🎤 Voice ON");
+  speak(pages[page]);
+}
 
+function stopSpeak(){
+  speaking = false;
+  speechSynthesis.cancel();
+  show("🔇 Voice OFF");
+}
+
+/* NOTICE */
 function show(t){
   notice.textContent = t;
   notice.style.display = "block";
   setTimeout(()=>notice.style.display="none",2000);
 }
 
-/* stars */
+/* STARS */
 for(let i=0;i<100;i++){
   let s=document.createElement("div");
   s.className="star";
@@ -252,7 +224,7 @@ for(let i=0;i<100;i++){
   stars.appendChild(s);
 }
 
-/* shooting stars */
+/* SHOOTING STARS */
 setInterval(()=>{
   let sh=document.createElement("div");
   sh.className="shooting";
@@ -262,7 +234,7 @@ setInterval(()=>{
   setTimeout(()=>sh.remove(),2000);
 },2500);
 
-/* themes */
+/* THEMES */
 const themes=[
 ["#001f4d","#0a3d91"],["#006994","#00b4d8"],["#7f1d1d","#ff6b00"],
 ["#14532d","#22c55e"],["#2e1065","#7c3aed"],["#ff0080","#00dbde"],
@@ -270,7 +242,8 @@ const themes=[
 ["#065f46","#7dd3fc"]
 ];
 
-const canvas=document.getElementById("bg"),ctx=canvas.getContext("2d");
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
 
 function resize(){
   canvas.width=innerWidth;
@@ -279,9 +252,10 @@ function resize(){
 addEventListener("resize",resize);
 resize();
 
-let themeIndex=0;
-theme.onchange=e=>themeIndex=+e.target.value;
+let themeIndex = 0;
+theme.onchange = e => themeIndex = +e.target.value;
 
+/* BACKGROUND DRAW */
 function draw(){
   const g=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
   g.addColorStop(0,themes[themeIndex][0]);
@@ -290,16 +264,12 @@ function draw(){
   ctx.fillStyle=g;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  const t=Date.now()/500;
-  for(let i=0;i<30;i++){
-    ctx.beginPath();
-    ctx.arc((i*70+t*10)%canvas.width,(i*40+t*5)%canvas.height,2+(i%3),0,Math.PI*2);
-    ctx.fillStyle="rgba(255,255,255,.5)";
-    ctx.fill();
-  }
   requestAnimationFrame(draw);
 }
 draw();
+
+/* ✅ FINAL FIX: START APP */
+update();
 </script>
 
 </body>
