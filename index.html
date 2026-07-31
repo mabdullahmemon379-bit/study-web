@@ -1,764 +1,294 @@
-None selected 
-
-Skip to content
-Using Gmail with screen readers
-in:sent 
-Enable desktop notifications for Gmail.
-   OK  No thanks
-1 of 7
-(no subject)
-
-Abdullah Memon Memon <mabdullahmemon379@gmail.com>
-Attachments
-Jul 30, 2026, 10:56 PM (13 hours ago)
-to Mrmicheal815
-
-
- 6 Attachments
-  •  Scanned by Gmail
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exercise 2.2 – Logarithmic & Exponential Form | Evershine Digital Notebook</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Web Pro</title>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 22px;
-    background: #f5e6d3;
-    background-image: 
-      repeating-linear-gradient(90deg, rgba(160,120,80,0.03) 0px, rgba(160,120,80,0.03) 1px, transparent 1px, transparent 40px),
-      repeating-linear-gradient(0deg, rgba(160,120,80,0.03) 0px, rgba(160,120,80,0.03) 1px, transparent 1px, transparent 40px);
-    min-height: 100vh;
-    padding: 20px;
-  }
-  .header {
-    text-align: center;
-    padding: 25px 15px;
-    margin-bottom: 30px;
-    background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(139,69,19,0.3);
-    border: 3px solid #654321;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 140px;
-  }
-  .header h1 {
-    font-family: 'Merriweather', serif;
-    font-size: 2.2rem;
-    color: #FFF8DC;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-  .header .sub {
-    font-size: 1.2rem;
-    color: #FFE4B5;
-    margin: 3px 0;
-    font-weight: 600;
-  }
-  .header .copyright {
-    font-size: 1rem;
-    color: #DEB887;
-    margin-top: 8px;
-    font-style: italic;
-  }
-  .logo-left, .logo-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #DEB887;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    background: #FFF8DC;
-    z-index: 2;
-  }
-  .logo-left { left: 20px; }
-  .logo-right { right: 20px; }
-  .logo-left img, .logo-right img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    display: block;
-  }
-  .header-text {
-    position: relative;
-    z-index: 1;
-    padding: 0 140px;
-  }
-  .cards-container {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  .card {
-    background: linear-gradient(135deg, #F5DEB3 0%, #DEB887 30%, #D2B48C 60%, #C19A6B 100%);
-    background-image: 
-      linear-gradient(135deg, #F5DEB3 0%, #DEB887 30%, #D2B48C 60%, #C19A6B 100%),
-      repeating-linear-gradient(0deg, rgba(139,90,43,0.08) 0px, rgba(139,90,43,0.08) 2px, transparent 2px, transparent 18px),
-      repeating-linear-gradient(90deg, rgba(139,90,43,0.05) 0px, rgba(139,90,43,0.05) 2px, transparent 2px, transparent 30px);
-    border: 3px solid #8B4513;
-    border-radius: 14px;
-    box-shadow: 0 6px 20px rgba(139,69,19,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
-    overflow: hidden;
-  }
-  .card-inner { padding: 0; }
-  .question-section {
-    background: rgba(255,248,220,0.6);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin: 22px 24px 0 24px;
-    border: 2px solid #CD853F;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom: none;
-  }
-  .question-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .q-number {
-    background: #8B4513;
-    color: #FFF8DC;
-    font-weight: 900;
-    font-size: 1.1rem;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-family: 'Merriweather', serif;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-  .q-text {
-    flex: 1;
-    font-family: 'Merriweather', serif;
-    font-size: 22px;
-    color: #4a0000;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-  .tts-btn {
-    background: #8B4513;
-    color: #FFF8DC;
-    border: 2px solid #654321;
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1rem;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-  .tts-btn:hover { background: #A0522D; }
-  .tts-btn:active { background: #654321; }
-  .tts-btn.speaking { background: linear-gradient(135deg, #228B22, #2E8B57); border-color: #006400; }
-  .answer-section {
-    background: rgba(245,245,220,0.7);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin: 0 24px 22px 24px;
-    border: 2px solid #CD853F;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top: none;
-  }
-  .answer-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .ans-label {
-    background: #2E8B57;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 4px 12px;
-    border-radius: 6px;
-    flex-shrink: 0;
-    font-family: 'Merriweather', serif;
-  }
-  .ans-text {
-    flex: 1;
-    font-size: 22px;
-    color: #1a1a1a;
-    line-height: 1.7;
-    font-weight: 600;
-  }
+html,body{
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  font-family:Arial,sans-serif;
+  color:white;
+  background:black;
+}
 
-  /* ===== KEYWORD COLORS ===== */
-  .kw-red { color: #C41E3A; font-weight: 700; }
-  .kw-blue { color: #1E90FF; font-weight: 700; }
-  .kw-orange { color: #FF8C00; font-weight: 700; }
-  .kw-green { color: #228B22; font-weight: 700; }
-  .kw-purple { color: #8B008B; font-weight: 700; }
-  .kw-brown { color: #8B4513; font-weight: 700; }
-  .kw-teal { color: #008080; font-weight: 700; }
-  .kw-pink { color: #C71585; font-weight: 700; }
-  .kw-navy { color: #000080; font-weight: 700; }
-  .kw-crimson { color: #DC143C; font-weight: 700; }
-  .kw-gold { color: #B8860B; font-weight: 700; }
-  .kw-indigo { color: #4B0082; font-weight: 700; }
-  .kw-olive { color: #556B2F; font-weight: 700; }
+/* BACKGROUND CANVAS */
+#bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
 
-  /* ===== ANSWER COLORS ===== */
-  .ans-red { color: #FF0000; font-weight: 900; }
-  .ans-blue { color: #0000CD; font-weight: 900; }
-  .ans-green { color: #006400; font-weight: 900; }
-  .ans-purple { color: #9400D3; font-weight: 900; }
-  .ans-orange { color: #FF4500; font-weight: 900; }
-  .ans-teal { color: #008B8B; font-weight: 900; }
-  .ans-pink { color: #FF1493; font-weight: 900; }
-  .ans-gold { color: #DAA520; font-weight: 900; }
-  .ans-indigo { color: #483D8B; font-weight: 900; }
-  .ans-brown { color: #A0522D; font-weight: 900; }
+/* STARS */
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+}
 
-  .section-header {
-    background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
-    color: #FFF8DC;
-    padding: 14px 20px;
-    border-radius: 10px;
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    text-align: center;
-    border: 2px solid #654321;
-    box-shadow: 0 3px 10px rgba(139,69,19,0.2);
-  }
-  .sub-part {
-    margin: 10px 0;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 6px;
-    border-left: 3px solid #8B4513;
-  }
-  .sub-label {
-    color: #8B4513;
-    font-weight: 700;
-    font-size: 20px;
-  }
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  animation:fall linear infinite;
+}
 
-  /* ===== IMAGE AUTO FIT FULL WIDTH ===== */
-  .card-image {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 3px solid #8B4513;
-    margin: 15px 0;
-    display: block;
-    box-shadow: 0 4px 12px rgba(139,69,19,0.2);
-  }
-  .img-label {
-    text-align: center;
-    color: #8B4513;
-    font-weight: 700;
-    font-size: 18px;
-    margin-top: 5px;
-    font-style: italic;
-  }
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
 
-  /* ===== TEXTBOOK STEP STYLING ===== */
-  .solution-line {
-    margin: 6px 0;
-    padding: 4px 0;
-  }
-  .implies {
-    color: #8B4513;
-    font-weight: 900;
-    margin: 0 8px;
-  }
-  .step-box {
-    background: rgba(255,248,220,0.8);
-    border: 2px solid #CD853F;
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin: 8px 0;
-  }
-  .step-title {
-    color: #2E8B57;
-    font-weight: 700;
-    font-size: 20px;
-    margin-bottom: 6px;
-  }
-  .formula-highlight {
-    background: rgba(255,255,255,0.6);
-    border: 2px dashed #8B4513;
-    border-radius: 8px;
-    padding: 10px 16px;
-    display: inline-block;
-    margin: 6px 0;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    color: #8B4513;
-    font-size: 20px;
-  }
-  .final-box {
-    background: linear-gradient(135deg, rgba(139,69,19,0.15), rgba(160,82,45,0.08));
-    border: 3px solid #8B4513;
-    border-radius: 8px;
-    padding: 12px 18px;
-    margin: 10px 0;
-    text-align: center;
-    font-weight: 800;
-    color: #8B4513;
-    font-size: 22px;
-  }
-  .power {
-    display: inline-block;
-    vertical-align: super;
-    font-size: 0.75em;
-    line-height: 0;
-    margin-left: 1px;
-    font-weight: 700;
-  }
-  .sub {
-    display: inline-block;
-    vertical-align: sub;
-    font-size: 0.75em;
-    line-height: 0;
-    margin-left: 1px;
-  }
-  .frac {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    margin: 0 3px;
-  }
-  .frac .num {
-    display: block;
-    border-bottom: 2px solid currentColor;
-    padding: 0 4px;
-    font-size: 0.85em;
-    line-height: 1.3;
-  }
-  .frac .den {
-    display: block;
-    padding: 0 4px;
-    font-size: 0.85em;
-    line-height: 1.3;
-  }
-  .log-base {
-    display: inline-block;
-    vertical-align: sub;
-    font-size: 0.7em;
-    line-height: 0;
-    margin-left: 1px;
-  }
+/* SHOOTING STARS */
+.shooting{
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  animation:shoot 2s linear forwards;
+}
 
-  @media (max-width: 900px) {
-    .logo-left, .logo-right { width: 90px; height: 90px; }
-    .logo-left { left: 15px; }
-    .logo-right { right: 15px; }
-    .header-text { padding: 0 110px; }
-  }
-  @media (max-width: 700px) {
-    .logo-left, .logo-right {
-      position: relative;
-      top: auto;
-      transform: none;
-      margin: 0 auto 10px auto;
-      width: 75px;
-      height: 75px;
-    }
-    .logo-left { left: auto; }
-    .logo-right { right: auto; }
-    .header { min-height: auto; padding-top: 15px; }
-    .header-text { padding: 0; }
-  }
-  @media (max-width: 600px) {
-    body { padding: 10px; font-size: 18px; }
-    .header h1 { font-size: 1.6rem; }
-    .question-section { margin: 15px 15px 0 15px; padding: 12px 14px; }
-    .answer-section { margin: 0 15px 15px 15px; padding: 12px 14px; }
-    .q-text { font-size: 18px; }
-    .ans-text { font-size: 18px; }
-    .section-header { font-size: 1.2rem; padding: 10px 15px; }
-    .q-number { width: 30px; height: 30px; font-size: 1rem; }
-    .tts-btn { width: 30px; height: 30px; font-size: 0.9rem; }
-    .logo-left, .logo-right { width: 60px; height: 60px; }
-    .header-text { padding: 0; }
-    .sub-label { font-size: 16px; }
-    .card-image { max-width: 100%; }
-    .power { font-size: 0.7em; }
-    .formula-highlight { font-size: 16px; }
-    .final-box { font-size: 18px; }
-  }
-  @media (max-width: 400px) {
-    body { padding: 8px; font-size: 16px; }
-    .header h1 { font-size: 1.3rem; }
-    .q-text { font-size: 16px; }
-    .ans-text { font-size: 16px; }
-    .section-header { font-size: 1.1rem; padding: 8px 12px; }
-    .question-section { margin: 12px 12px 0 12px; padding: 10px 12px; }
-    .answer-section { margin: 0 12px 12px 12px; padding: 10px 12px; }
-    .formula-highlight { font-size: 14px; }
-    .final-box { font-size: 16px; }
-    .power { font-size: 0.65em; }
-  }
+@keyframes shoot{
+  to{transform:translate(400px,200px);opacity:0}
+}
+
+/* UI */
+.top-left,.top-right{
+  position:fixed;
+  top:10px;
+  z-index:10;
+}
+.top-left{left:10px}
+.top-right{right:10px}
+
+/* CONTENT BOX */
+.box{
+  position:relative;
+  z-index:20;
+  width:min(800px,85%);
+  margin:120px auto;
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
+  text-align:center;
+}
+
+button,select,input{
+  padding:8px;
+  margin:4px;
+}
+
+.notice{
+  position:fixed;
+  top:60px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.6);
+  padding:10px 16px;
+  border-radius:12px;
+  display:none;
+  z-index:50;
+}
+
+/* ✅ FIX ADDED: BOLD TEXT SYSTEM */
+#content{
+  white-space:pre-wrap;
+  font-weight:500;
+  line-height:1.7;
+}
+
+#content b{
+  display:block;
+  font-size:18px;
+  font-weight:700;
+  margin-top:10px;
+}
 </style>
 </head>
+
 <body>
 
-<div class="header">
-  <div class="logo-left">
-    <img src="images/mono.jpg" onerror="this.onerror=null;this.src='images/mono.png';" alt="Logo">
-  </div>
-  <div class="logo-right">
-    <img src="images/mono.jpg" onerror="this.onerror=null;this.src='images/mono.png';" alt="Logo">
-  </div>
-  <div class="header-text">
-    <h1>📖 Evershine Digital Notebook – Class 9 Math</h1>
-    <div class="sub">Chapter 2 – Logarithms</div>
-    <div class="sub">Exercise 2.2</div>
-    <div class="copyright">All Copyright Reserved Evershine School – Developer Sir Arbab Mithal</div>
-  </div>
+<canvas id="bg"></canvas>
+<div class="stars" id="stars"></div>
+<div class="notice" id="notice"></div>
+
+<div class="top-left">
+<select id="theme">
+<option value="0">🌌 Space</option>
+<option value="1">🌊 Ocean</option>
+<option value="2">🔥 Fire</option>
+<option value="3">🌲 Forest</option>
+<option value="4">💜 Galaxy</option>
+<option value="5">🌈 Rainbow</option>
+<option value="6">⚡ Electric</option>
+<option value="7">🌸 Sakura</option>
+<option value="8">🤖 Cyberpunk</option>
+<option value="9">🌠 Aurora</option>
+</select>
 </div>
 
-<div class="cards-container">
+<div class="top-right">
+🔊 Volume<br>
+<input type="range" id="vol" min="0" max="1" step="0.1" value="1">
+</div>
 
-  <div class="section-header">Exercise 2.2 – Logarithmic Form, Exponential Form & Finding Unknowns</div>
+<div class="box">
+<h1 id="title"></h1>
+<pre id="content"></pre>
 
-  <!-- IMAGE Q1 -->
-  <img class="card-image" src="images/QA1.png" alt="Exercise 2.2 Question 1" onerror="this.onerror=null;this.src='images/QA1.jpg'">
-  <div class="img-label">Fig: Q1 – Write in Logarithmic Form</div>
+<button onclick="prevPage()">⬅ Previous</button>
+<button onclick="nextPage()">Next ➡</button>
 
-  <!-- Q1 -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="question-section">
-        <div class="question-header">
-          <div class="q-number">1</div>
-          <div class="q-text">Write the following in <span class="kw-blue">logarithmic form</span>:</div>
-          <button class="tts-btn" onclick="speak(this, 'Question 1. Write the following in logarithmic form.')">🔊</button>
-        </div>
-      </div>
-      <div class="answer-section">
-        <div class="answer-header">
-          <div class="ans-label">Ans.</div>
-          <div class="ans-text">
-
-            <div class="step-box">
-              <div class="step-title">📌 Rule: If a<span class="power">m</span> = N, then log<span class="log-base">a</span> N = m</div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(i)</span> <span class="kw-red">7<span class="power">3</span> = 343</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-red">log<span class="log-base">7</span> 343 = 3</span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(ii)</span> <span class="kw-blue">3<span class="power">−4</span> = <span class="frac"><span class="num">1</span><span class="den">81</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-blue">log<span class="log-base">3</span> (<span class="frac"><span class="num">1</span><span class="den">81</span></span>) = −4</span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(iii)</span> <span class="kw-green">10<span class="power">−3</span> = 0.001</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-green">log<span class="log-base">10</span> 0.001 = −3</span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(iv)</span> <span class="kw-purple">∛(8<span class="power">2</span>) = 4</span>
-              <div class="solution-line">
-                First, <span class="formula-highlight">∛(8<span class="power">2</span>) = 8<span class="power">2/3</span> = 4</span>
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-purple">log<span class="log-base">8</span> 4 = <span class="frac"><span class="num">2</span><span class="den">3</span></span></span>
-              </div>
-            </div>
-
-          </div>
-          <button class="tts-btn" onclick="speak(this, 'Answer to Question 1. Part 1: 7 cubed equals 343, therefore log base 7 of 343 equals 3. Part 2: 3 to the power minus 4 equals 1 by 81, therefore log base 3 of 1 by 81 equals minus 4. Part 3: 10 to the power minus 3 equals 0.001, therefore log base 10 of 0.001 equals minus 3. Part 4: cube root of 8 squared equals 4, which is 8 to the power 2 by 3 equals 4, therefore log base 8 of 4 equals 2 by 3.')">🔊</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- IMAGE Q2 -->
-  <img class="card-image" src="images/QA2.png" alt="Exercise 2.2 Question 2" onerror="this.onerror=null;this.src='images/QA2.jpg'">
-  <div class="img-label">Fig: Q2 – Write in Exponential Form</div>
-
-  <!-- Q2 -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="question-section">
-        <div class="question-header">
-          <div class="q-number">2</div>
-          <div class="q-text">Write the following in <span class="kw-blue">exponential form</span>:</div>
-          <button class="tts-btn" onclick="speak(this, 'Question 2. Write the following in exponential form.')">🔊</button>
-        </div>
-      </div>
-      <div class="answer-section">
-        <div class="answer-header">
-          <div class="ans-label">Ans.</div>
-          <div class="ans-text">
-
-            <div class="step-box">
-              <div class="step-title">📌 Rule: If log<span class="log-base">a</span> N = m, then a<span class="power">m</span> = N</div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(i)</span> <span class="kw-red">log<span class="log-base">27</span> 81 = <span class="frac"><span class="num">4</span><span class="den">3</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-red">27<span class="power">4/3</span> = 81</span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(ii)</span> <span class="kw-blue">log<span class="log-base">2</span> (<span class="frac"><span class="num">1</span><span class="den">8</span></span>) = −3</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-blue">2<span class="power">−3</span> = <span class="frac"><span class="num">1</span><span class="den">8</span></span></span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(iii)</span> <span class="kw-green">log<span class="log-base">10</span> 1 = 0</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-green">10<span class="power">0</span> = 1</span>
-              </div>
-            </div>
-
-            <div class="sub-part">
-              <span class="sub-label">(iv)</span> <span class="kw-purple">log<span class="log-base">10</span> (0.01) = −2</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> <span class="ans-purple">10<span class="power">−2</span> = 0.01</span>
-              </div>
-            </div>
-
-          </div>
-          <button class="tts-btn" onclick="speak(this, 'Answer to Question 2. Part 1: log base 27 of 81 equals 4 by 3, therefore 27 to the power 4 by 3 equals 81. Part 2: log base 2 of 1 by 8 equals minus 3, therefore 2 to the power minus 3 equals 1 by 8. Part 3: log base 10 of 1 equals 0, therefore 10 to the power 0 equals 1. Part 4: log base 10 of 0.01 equals minus 2, therefore 10 to the power minus 2 equals 0.01.')">🔊</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- IMAGE Q3 -->
-  <img class="card-image" src="images/QA3.png" alt="Exercise 2.2 Question 3" onerror="this.onerror=null;this.src='images/QA3.jpg'">
-  <div class="img-label">Fig: Q3 – Find the Value of Unknown</div>
-
-  <!-- Q3 -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="question-section">
-        <div class="question-header">
-          <div class="q-number">3</div>
-          <div class="q-text">Find the value of <span class="kw-blue">unknown</span> in the following:</div>
-          <button class="tts-btn" onclick="speak(this, 'Question 3. Find the value of unknown in the following.')">🔊</button>
-        </div>
-      </div>
-      <div class="answer-section">
-        <div class="answer-header">
-          <div class="ans-label">Ans.</div>
-          <div class="ans-text">
-
-            <div class="step-box">
-              <div class="step-title">📌 Method: Convert to exponential form, then solve</div>
-            </div>
-
-            <!-- (i) -->
-            <div class="sub-part">
-              <span class="sub-label">(i)</span> <span class="kw-red">log<span class="log-base">32</span> x = <span class="frac"><span class="num">1</span><span class="den">2</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 32<span class="power">1/2</span> = x
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> x = √32 = √(16 × 2) = 4√2
-              </div>
-              <div class="final-box">x = <span class="ans-red">4√2 ≈ 5.657</span></div>
-            </div>
-
-            <!-- (ii) -->
-            <div class="sub-part">
-              <span class="sub-label">(ii)</span> <span class="kw-blue">log<span class="log-base">x</span> 3 = <span class="frac"><span class="num">1</span><span class="den">2</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> x<span class="power">1/2</span> = 3
-              </div>
-              <div class="solution-line">
-                Squaring both sides: x = 3<span class="power">2</span>
-              </div>
-              <div class="final-box">x = <span class="ans-blue">9</span></div>
-            </div>
-
-            <!-- (iii) -->
-            <div class="sub-part">
-              <span class="sub-label">(iii)</span> <span class="kw-green">log<span class="log-base">√5</span> 25 = y</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> (√5)<span class="power">y</span> = 25
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 5<span class="power">y/2</span> = 5<span class="power">2</span>
-              </div>
-              <div class="solution-line">
-                Equating exponents: <span class="frac"><span class="num">y</span><span class="den">2</span></span> = 2
-              </div>
-              <div class="final-box">y = <span class="ans-green">4</span></div>
-            </div>
-
-            <!-- (iv) -->
-            <div class="sub-part">
-              <span class="sub-label">(iv)</span> <span class="kw-purple">log<span class="log-base">4</span> x = <span class="frac"><span class="num">3</span><span class="den">2</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 4<span class="power">3/2</span> = x
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> x = (√4)<span class="power">3</span> = 2<span class="power">3</span>
-              </div>
-              <div class="final-box">x = <span class="ans-purple">8</span></div>
-            </div>
-
-            <!-- (v) -->
-            <div class="sub-part">
-              <span class="sub-label">(v)</span> <span class="kw-orange">log<span class="log-base">10</span> 100 = y</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 10<span class="power">y</span> = 100 = 10<span class="power">2</span>
-              </div>
-              <div class="solution-line">
-                Equating exponents: y = 2
-              </div>
-              <div class="final-box">y = <span class="ans-orange">2</span></div>
-            </div>
-
-            <!-- (vi) -->
-            <div class="sub-part">
-              <span class="sub-label">(vi)</span> <span class="kw-teal">log<span class="log-base">x</span> 64 = 3</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> x<span class="power">3</span> = 64 = 4<span class="power">3</span>
-              </div>
-              <div class="final-box">x = <span class="ans-teal">4</span></div>
-            </div>
-
-            <!-- (vii) -->
-            <div class="sub-part">
-              <span class="sub-label">(vii)</span> <span class="kw-pink">log<span class="log-base">a</span> 1 = 0</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> a<span class="power">0</span> = 1
-              </div>
-              <div class="solution-line">
-                True for all a > 0, a ≠ 1
-              </div>
-              <div class="final-box">a = <span class="ans-pink">any positive number ≠ 1</span></div>
-            </div>
-
-            <!-- (viii) -->
-            <div class="sub-part">
-              <span class="sub-label">(viii)</span> <span class="kw-navy">log<span class="log-base">55</span> 55 = y</span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 55<span class="power">y</span> = 55 = 55<span class="power">1</span>
-              </div>
-              <div class="final-box">y = <span class="ans-indigo">1</span></div>
-            </div>
-
-            <!-- (ix) -->
-            <div class="sub-part">
-              <span class="sub-label">(ix)</span> <span class="kw-crimson">log<span class="log-base">64</span> 8 = <span class="frac"><span class="num">x</span><span class="den">2</span></span></span>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 64<span class="power">x/2</span> = 8
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> (8<span class="power">2</span>)<<span class="power">x/2</span> = 8<span class="power">1</span>
-              </div>
-              <div class="solution-line">
-                <span class="implies">⇒</span> 8<span class="power">x</span> = 8<span class="power">1</span>
-              </div>
-              <div class="solution-line">
-                Equating exponents: x = 1
-              </div>
-              <div class="final-box">x = <span class="ans-gold">1</span></div>
-            </div>
-
-          </div>
-          <button class="tts-btn" onclick="speak(this, 'Answer to Question 3. Part 1: log base 32 of x equals 1 by 2, so 32 to the power 1 by 2 equals x, x equals 4 root 2. Part 2: log base x of 3 equals 1 by 2, so x to the power 1 by 2 equals 3, x equals 9. Part 3: log base root 5 of 25 equals y, so root 5 to the power y equals 25, y equals 4. Part 4: log base 4 of x equals 3 by 2, so 4 to the power 3 by 2 equals x, x equals 8. Part 5: log base 10 of 100 equals y, so 10 to the power y equals 100, y equals 2. Part 6: log base x of 64 equals 3, so x cubed equals 64, x equals 4. Part 7: log base a of 1 equals 0, so a to the power 0 equals 1, a equals any positive number except 1. Part 8: log base 55 of 55 equals y, so 55 to the power y equals 55, y equals 1. Part 9: log base 64 of 8 equals x by 2, so 64 to the power x by 2 equals 8, x equals 1.')">🔊</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<br><br>
+<button onclick="startSpeak()">▶ Start Speak</button>
+<button onclick="stopSpeak()">⏹ Stop Speak</button>
 </div>
 
 <script>
-let currentUtterance = null;
-let currentBtn = null;
 
-function speak(btn, text) {
-  if ('speechSynthesis' in window) {
-    if (currentUtterance && window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
-      if (currentBtn) currentBtn.classList.remove('speaking');
-      if (currentBtn === btn) {
-        currentBtn = null;
-        currentUtterance = null;
-        return;
-      }
-    }
+/* FIXED DOM */
+const title = document.getElementById("title");
+const content = document.getElementById("content");
+const vol = document.getElementById("vol");
+const theme = document.getElementById("theme");
+const notice = document.getElementById("notice");
+const stars = document.getElementById("stars");
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.82;
-    utterance.pitch = 1.0;
-    utterance.volume = 1.0;
+/* PAGES */
+const pages = [`
+Biological Method
 
-    const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Samantha') || v.name.includes('Karen') || (v.lang === 'en-US' && v.default));
-    if (preferredVoice) utterance.voice = preferredVoice;
+1. Observation
+Scientists use senses and instruments.
 
-    utterance.onstart = function() {
-      btn.classList.add('speaking');
-      currentBtn = btn;
-      currentUtterance = utterance;
-    };
+2. Hypothesis
+An intelligent guess.
 
-    utterance.onend = function() {
-      btn.classList.remove('speaking');
-      currentBtn = null;
-      currentUtterance = null;
-    };
+3. Experiment
+Testing hypothesis.
 
-    utterance.onerror = function() {
-      btn.classList.remove('speaking');
-      currentBtn = null;
-      currentUtterance = null;
-    };
+4. Conclusion
+Result checking.
+`];
 
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert('Text-to-Speech is not supported in your browser.');
+let page = 0;
+let speaking = false;
+
+/* UPDATE */
+function update(){
+  title.textContent = "Page " + (page + 1);
+
+  /* ✅ BOLD FIX APPLIED HERE */
+  content.innerHTML = pages[page]
+    .replace(/\n\n/g,"<br><br>")
+    .replace(/([A-Z][a-zA-Z ]+)/g,"<b>$1</b>");
+
+  if(speaking) speak(pages[page]);
+}
+
+function nextPage(){
+  if(page < pages.length - 1){
+    page++;
+    update();
   }
 }
 
-window.speechSynthesis.getVoices();
-if (window.speechSynthesis.onvoiceschanged !== undefined) {
-  window.speechSynthesis.onvoiceschanged = function() {
-    window.speechSynthesis.getVoices();
-  };
+function prevPage(){
+  if(page > 0){
+    page--;
+    update();
+  }
 }
+
+/* SPEECH */
+function speak(text){
+  speechSynthesis.cancel();
+  let u = new SpeechSynthesisUtterance(text);
+  u.volume = parseFloat(vol.value);
+  speechSynthesis.speak(u);
+}
+
+function startSpeak(){
+  speaking = true;
+  show("🎤 Voice ON");
+  speak(pages[page]);
+}
+
+function stopSpeak(){
+  speaking = false;
+  speechSynthesis.cancel();
+  show("🔇 Voice OFF");
+}
+
+function show(t){
+  notice.textContent = t;
+  notice.style.display = "block";
+  setTimeout(()=>notice.style.display="none",2000);
+}
+
+/* STARS */
+for(let i=0;i<100;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=(3+Math.random()*6)+"s";
+  stars.appendChild(s);
+}
+
+/* SHOOTING */
+setInterval(()=>{
+  let sh=document.createElement("div");
+  sh.className="shooting";
+  sh.style.left=Math.random()*50+"%";
+  sh.style.top=Math.random()*50+"%";
+  stars.appendChild(sh);
+  setTimeout(()=>sh.remove(),2000);
+},2500);
+
+/* THEMES */
+const themes=[
+["#001f4d","#0a3d91"],["#006994","#00b4d8"],["#7f1d1d","#ff6b00"],
+["#14532d","#22c55e"],["#2e1065","#7c3aed"],["#ff0080","#00dbde"],
+["#0f172a","#38bdf8"],["#db2777","#f9a8d4"],["#111827","#06b6d4"],
+["#065f46","#7dd3fc"]
+];
+
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+}
+addEventListener("resize",resize);
+resize();
+
+let themeIndex=0;
+theme.onchange=e=>themeIndex=+e.target.value;
+
+function draw(){
+  const g=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+  g.addColorStop(0,themes[themeIndex][0]);
+  g.addColorStop(1,themes[themeIndex][1]);
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+update();
+
 </script>
 
 </body>
 </html>
-ex 2.2.html
-Displaying ex 2.2.html.
